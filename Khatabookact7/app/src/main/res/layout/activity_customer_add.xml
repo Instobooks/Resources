@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add new Cutomer Details.."
+        android:textSize="30sp"
+        android:textAlignment="center"/>
+
+
+
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/EtxtName"
+        android:inputType="textPersonName"
+        android:hint="Enter the Name"
+        android:textSize="30sp"
+        android:background="@drawable/edit_text_single"/>
+
+    <TableLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/EtxtPhone"
+                android:layout_width="322dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="phone"
+                android:textSize="30sp"
+                android:hint="Enter mobile number..."
+                android:inputType="phone"
+
+                android:background="@drawable/edit_text_single"/>
+        </TableRow>
+    </TableLayout>
+    <Button
+        android:id="@+id/sendOTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+ Add"
+        android:onClick="addBtn"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*An OTP will bwe sent to your mobile number for verification"
+        android:textSize="10sp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

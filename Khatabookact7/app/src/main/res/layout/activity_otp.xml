@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OTP"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:paddingTop="30dp"
+        android:layout_height="wrap_content"
+        android:text="Enter OTP..."
+        android:textSize="30sp"
+        android:gravity="center_horizontal"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EtxtOtp"
+        android:paddingTop="15dp"
+        android:textSize="30sp"
+        android:inputType="number"
+        android:gravity="center_horizontal"
+        android:background="@drawable/edit_text_single"/>
+    <Button
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:id="@+id/verOtp"
+        android:layout_height="wrap_content"
+        android:onClick="verOtp"
+        android:text="SUBMIT"
+        android:gravity="center_horizontal"/>
+</LinearLayout>

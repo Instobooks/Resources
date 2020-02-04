@@ -6,10 +6,8 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="735dp"
-        android:orientation="vertical">
+
+
 
         <ListView
             android:id="@+id/lstView"
@@ -19,15 +17,10 @@
             android:dividerHeight="1dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false" />
-    </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:gravity="bottom"
-        android:paddingBottom="10dp"
-        android:text="hi" />
+
+
+
 
 
 
