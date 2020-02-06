@@ -33,11 +33,11 @@
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/EtxtPhone"
-                android:layout_width="322dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="phone"
-                android:textSize="40sp"
-                android:hint="Enter mobile number..."
+
+                android:textSize="30sp"
+                android:hint="Enter number"
                 android:inputType="phone"
 
                 android:background="@drawable/edit_text_single"/>

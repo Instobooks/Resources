@@ -66,6 +66,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "1");
+                EtxtNotes.setVisibility(View.VISIBLE);
 
             }
         });
@@ -75,7 +76,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "2");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -84,7 +85,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "3");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -102,7 +103,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "5");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -112,7 +113,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "6");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -122,7 +123,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "7");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -140,7 +141,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "9");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -149,7 +150,7 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + ".");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
 
@@ -158,11 +159,11 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View view) {
 
                 textView.setText(textView.getText() + "0");
-
+                EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
         if(textView.getText().length()!=0){
-               EtxtNotes.setVisibility(View.VISIBLE);
+
 
         }
     }
