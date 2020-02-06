@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".VerifyPhone"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity android:name=".Calculator" />
+        <activity android:name=".VerifyPhone" />
         <activity android:name=".OTP" />
         <activity
             android:name=".Splash"

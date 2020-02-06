@@ -36,7 +36,7 @@
                 android:layout_width="322dp"
                 android:layout_height="wrap_content"
                 android:autofillHints="phone"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:hint="Enter mobile number..."
                 android:inputType="phone"
 

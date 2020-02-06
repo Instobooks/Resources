@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/item1"
-        android:title="MenuItem1"
+        android:title="Add a Customer"
         android:icon="@drawable/ic_access_black_24dp"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/item2"
-        android:title="MenuItem1"
+        android:title="Calculator(Temp)"
         app:showAsAction="never"/>
     <item android:id="@+id/item3"
-        android:title="MenuItem1"
+        android:title="Settings"
         app:showAsAction="never"/>
 
 

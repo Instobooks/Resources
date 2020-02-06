@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 public class OTP extends AppCompatActivity {
     EditText EtxtOtp;
-    String otp="5398";
-    String Etxt;
+    String otp="abc";
+    public String Etxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +24,13 @@ public class OTP extends AppCompatActivity {
             Intent i= new Intent(this,MainActivity.class);
             startActivity(i);
 
+
+    }
+    public boolean checkOtp(){
+        if(Etxt==otp){
+            return true;
+        }
+        return false;
     }
 }
+

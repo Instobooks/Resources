@@ -19,7 +19,7 @@
         android:id="@+id/EtxtOtp"
         android:paddingTop="15dp"
         android:textSize="30sp"
-        android:inputType="number"
+        android:inputType="text"
         android:gravity="center_horizontal"
         android:background="@drawable/edit_text_single"/>
     <Button

@@ -23,7 +23,7 @@
                 android:id="@+id/EtxtPhone"
                 android:layout_width="322dp"
                 android:layout_height="wrap_content"
-                android:autofillHints="phone"
+
                 android:hint="Enter Mobile Number..."
                 android:inputType="phone"
                 android:background="@drawable/edit_text_single"/>
