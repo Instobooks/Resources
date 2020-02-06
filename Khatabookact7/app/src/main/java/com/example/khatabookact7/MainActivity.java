@@ -1,14 +1,14 @@
+//Package Specification
+//Created and Updated by Jaisal Shah on 06/02/2020.
 package com.example.khatabookact7;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,21 +17,26 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     ListView lstView;
     ArrayList<String> arr_name;
     ArrayList<String> arr_amt;
     ArrayList<String> arr_trxnType;
     EditText inputSearch;
+
+//    Implementation of options menu .
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu1,menu);
         return true;
     }
-
+// options menu Events
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Implementation of Activities that run only once after Installation.
+
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
@@ -68,15 +75,20 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
 
-
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).commit();
 
+
+
+//        Normal   initialozation of Components
         lstView=(ListView)findViewById(R.id.lstView);
         arr_name=new ArrayList<>();
         arr_amt=new ArrayList<>();
         arr_trxnType=new ArrayList<>();
         inputSearch=(EditText)findViewById(R.id.inputSearch);
+
+//        Array for name of customer
+
         arr_name.add("A");
         arr_name.add("ANM");
         arr_name.add("B");
@@ -98,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         arr_name.add("mvnbv");
         arr_name.add("poiuy");
 
+//        Array for balance of customer
         arr_amt.add("List 1");
         arr_amt.add("List 2");
         arr_amt.add("List 3");
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         arr_amt.add("List 9");
         arr_amt.add("List 10");
 
+//        Array for Transaction type of customer;
         arr_trxnType.add("List 1");
         arr_trxnType.add("List 2");
         arr_trxnType.add("List 3");
@@ -142,12 +156,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+//Custom Layout fro ListView containing above arrays
 
         CustomLayoutAdapter Custom=new CustomLayoutAdapter(this,arr_name,arr_amt,arr_trxnType);
         lstView.setAdapter(Custom);
 
 
-
+//ListView Events
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -161,8 +176,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 alertDialog.show();
+
+//                Implementation of push notification
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this);
+
+                builder.setContentTitle("Selected:"+arr_name.get(position)+"\nContact No:"+arr_amt.get(position)+"\nEmail:"+arr_trxnType.get(position))
+                        .setContentText("OTP").setSmallIcon(R.drawable.ic_access_black_24dp)
+                        .build();
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                Notification notification = builder.build();
+
+                notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+                notificationManager.notify(0, notification);
             }
         });
+
+//        Implementation of Filter Search
+//        Code ot working because the adapter passed on line 204 is causing unprecedented error
+
+
 //        inputSearch.addTextChangedListener(new TextWatcher() {
 //
 //            @Override

@@ -1,4 +1,6 @@
+//Created and Updated by Jaisal Shah on 06/02/2020
 package com.example.khatabookact7;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -60,7 +62,7 @@ public class Calculator extends AppCompatActivity {
 
 
 
-
+//        Button Events
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,10 +164,7 @@ public class Calculator extends AppCompatActivity {
                 EtxtNotes.setVisibility(View.VISIBLE);
             }
         });
-        if(textView.getText().length()!=0){
 
-
-        }
     }
 
 }

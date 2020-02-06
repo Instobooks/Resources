@@ -1,3 +1,4 @@
+//Created and Updated by Jaisal Shah on 06/02/2020
 package com.example.khatabookact7;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+//        Handler Events for delay generation
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

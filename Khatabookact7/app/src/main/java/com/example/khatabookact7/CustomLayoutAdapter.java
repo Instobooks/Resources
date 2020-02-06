@@ -1,3 +1,4 @@
+//Created and Updated by Jaisal Shah on 06/02/2020
 package com.example.khatabookact7;
 
 import android.app.Activity;
@@ -6,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.example.khatabookact7.R;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,7 @@ public class CustomLayoutAdapter extends ArrayAdapter<String> {
     ArrayList<String> name;
     ArrayList<String> amount;
     ArrayList<String> trxnType;
+//    Defining CustomLayuotAdapter method
     public CustomLayoutAdapter(Activity activity, ArrayList<String> arr_name,ArrayList<String> arr_amt,ArrayList <String> arr_trxntype){
         super(activity,R.layout.customlayout,arr_name);
         this.ac=activity;
@@ -25,6 +25,8 @@ public class CustomLayoutAdapter extends ArrayAdapter<String> {
         this.amount=arr_amt;
         this.trxnType=arr_trxntype;
     }
+
+//    Getting View details
     @Override
     public View getView(int position,View v,ViewGroup vg){
         LayoutInflater inflater=ac.getLayoutInflater();

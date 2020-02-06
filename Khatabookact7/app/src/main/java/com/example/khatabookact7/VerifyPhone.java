@@ -1,3 +1,4 @@
+//Created and updated by Jaisal Shah on 06/02/2020
 package com.example.khatabookact7;
 
 import android.app.Notification;
@@ -23,10 +24,14 @@ public class VerifyPhone extends AppCompatActivity {
         EtxtPhone=(EditText)findViewById(R.id.EtxtPhone);
         VerifyPhone ver=new VerifyPhone();
     }
+
+//    Button Events
     public void sendOtpBtn(View v) {
         if (verify()) {
+//            Random otp Generation
             Random rand = new Random();
             int randomInt = rand.nextInt(10000);
+//            Implementation of Push notification for OTP message
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
             builder.setContentTitle("Dear Customer, your OTP for Instobooks Registration is "+randomInt+".Use this OTPto register.")
@@ -38,6 +43,8 @@ public class VerifyPhone extends AppCompatActivity {
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
             notificationManager.notify(0, notification);
+
+
             Intent i = new Intent(this, OTP.class);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -51,6 +58,7 @@ public class VerifyPhone extends AppCompatActivity {
             Toast.makeText(this,"Invalid Input",Toast.LENGTH_SHORT).show();
         }
     }
+//    Implementation for verification
     public boolean verify() {
         if (EtxtPhone.getText().length() == 10) {
             return true;
