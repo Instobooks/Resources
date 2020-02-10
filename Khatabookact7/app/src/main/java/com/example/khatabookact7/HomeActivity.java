@@ -6,11 +6,14 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,6 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<String> arr_amt;
     ArrayList<String> arr_trxnType;
     EditText inputSearch;
+    ArrayAdapter<String> adapterReplica;
+    CustomLayoutAdapter Custom;
     int unique = 1;//fro unique notifications
 
     @Override
@@ -220,8 +225,38 @@ public class HomeActivity extends AppCompatActivity {
 
 //Custom Layout fro ListView containing above arrays
 
-        CustomLayoutAdapter Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
+        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
         lstView.setAdapter(Custom);
+//Changed from here
+
+
+        String products[] = {"Afcgvb", "ANMtdc", "Bzx nh", "qwertyu", "asdfgh",
+                "zxcvbn", "uiop",
+                "rtyu", "vbnmkl", "zxcvbnmdeg", "yuifghd" , "jkls" , "tyuixnm" , "vbnmwyui" , "hjkladdsd" , "sdfgvbnm" , "zxcvmn" , "mvnbv"};
+        adapterReplica = new ArrayAdapter<String>(this, R.layout.replicalist, R.id.product_name, products);
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                lstView.setAdapter(adapterReplica);
+                HomeActivity.this.adapterReplica.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+                lstView.setAdapter(Custom);
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+//                lstView.setAdapter(Custom);
+            }
+        });
     }
 
 }
