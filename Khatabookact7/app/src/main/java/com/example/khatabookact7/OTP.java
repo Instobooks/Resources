@@ -23,7 +23,7 @@ public class OTP extends AppCompatActivity {
 //    Verifying Otp
     public void verOtp(View v){
 
-            Intent i= new Intent(this,MainActivity.class);
+            Intent i= new Intent(this,HomeActivity.class);
             startActivity(i);
 
 

@@ -34,8 +34,9 @@ public class VerifyPhone extends AppCompatActivity {
 //            Implementation of Push notification for OTP message
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
-            builder.setContentTitle("Dear Customer, your OTP for Instobooks Registration is "+randomInt+".Use this OTPto register.")
-                    .setContentText("OTP").setSmallIcon(R.drawable.ic_access_black_24dp)
+            builder.setContentText("OTP").setSmallIcon(R.drawable.ic_access_black_24dp)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Dear Customer,Welcome to Instobooks your OTP for registration is "+randomInt+".Don't share youtr OTP ith anyone. "))
                     .build();
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             Notification notification = builder.build();

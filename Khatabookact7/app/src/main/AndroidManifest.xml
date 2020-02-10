@@ -9,14 +9,31 @@
         android:label="Instobooks"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/MyTheme"
         tools:replace="android:label">
         <activity
+            android:name=".CustomerActivity"
+            android:label="@string/title_activity_customer"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="Instobooks"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity android:name=".Calculator" />
-        <activity android:name=".VerifyPhone" />
-        <activity android:name=".OTP" />
+        <activity
+            android:name=".VerifyPhone"
+            android:label="Verify Details" />
+        <activity
+            android:name=".OTP"
+            android:label="OTP Verification" />
         <activity
             android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,6 +48,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AddCustomer"
+            android:label="Add New Khata"
             android:theme="@style/AppTheme" />
     </application>
 

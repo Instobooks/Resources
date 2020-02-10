@@ -6,7 +6,12 @@
     android:stretchColumns="*">
     <TableRow
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/cardbackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,27 +21,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="hello"
-                android:textSize="40sp"/>
+                android:typeface="sans"
+                android:textSize="30sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="5dp">
             <TextView
+                android:paddingRight="5dp"
                 android:id="@+id/txtAmt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hi"
                 android:textSize="25sp"
                 android:layout_gravity="end"
+                android:typeface="sans"
                 android:textAlignment="textEnd"/>
             <TextView
                 android:id="@+id/trxnType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hi"
+                android:paddingRight="5dp"
                 android:textSize="18sp"
                 android:layout_gravity="end"
+                android:typeface="sans"
                 android:textAlignment="textEnd"/>
         </LinearLayout>
     </TableRow>

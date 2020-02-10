@@ -2,13 +2,15 @@
 //Created and Updated by Jaisal Shah on 06/02/2020.
 package com.example.khatabookact7;
 
-
+//________________________________________________________________________________________________________________________________________________________
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,18 +19,20 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+//________________________________________________________________________________________________________________________________________________________
 public class MainActivity extends AppCompatActivity {
     ListView lstView;
     ArrayList<String> arr_name;
     ArrayList<String> arr_amt;
     ArrayList<String> arr_trxnType;
     EditText inputSearch;
-
+//________________________________________________________________________________________________________________________________________________________
 //    Implementation of options menu .
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu1,menu);
         return true;
     }
+    //______________________________________________________________________________________________________________________________________________________
 // options menu Events
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -57,12 +62,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    //________________________________________________________________________________________________________________________________________________________
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//            String name,amt,trxnType;
+    //        Getting Intent Data from previous activity
+//            Intent i = getIntent();
+//            name=i.getStringExtra("name");
+//            amt = i.getStringExtra("amount");
+//            trxnType = i.getStringExtra("trxnType");
+//            Toast.makeText(this,name+amt+trxnType,Toast.LENGTH_SHORT).show();
+//            Bundle extras = getIntent().getExtras();
+//            if (extras != null) {
+//                 name=extras.getString("Name");
+//                 amt=extras.getString("Amount");
+//                 trxnType=extras.getString("trxnType");
+//                 Toast.makeText(this,name+"\n"+amt+"\n"+trxnType,Toast.LENGTH_SHORT).show();
+//                 arr_name.add(0,name);
+//                 arr_amt.add(0,amt);
+//                 arr_trxnType.add(0,trxnType);
+//            }
 
+
+//________________________________________________________________________________________________________________________________________________________
 //        Implementation of Activities that run only once after Installation.
 
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -76,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).commit();
+                .putBoolean("isFirstRun", false).apply();
 
 
-
+//________________________________________________________________________________________________________________________________________________________
 //        Normal   initialozation of Components
         lstView=(ListView)findViewById(R.id.lstView);
         arr_name=new ArrayList<>();
@@ -156,12 +180,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
 //Custom Layout fro ListView containing above arrays
 
         CustomLayoutAdapter Custom=new CustomLayoutAdapter(this,arr_name,arr_amt,arr_trxnType);
         lstView.setAdapter(Custom);
 
-
+//________________________________________________________________________________________________________________________________________________________
 //ListView Events
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -191,32 +217,33 @@ public class MainActivity extends AppCompatActivity {
                 notificationManager.notify(0, notification);
             }
         });
-
+//________________________________________________________________________________________________________________________________________________________
 //        Implementation of Filter Search
-//        Code ot working because the adapter passed on line 204 is causing unprecedented error
+//
 
 
 //        inputSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 //
+//            }
+//
+//            //
 //            @Override
 //            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
 //                // When user changed the Text
-//                MainActivity.this.adapter.getFilter().filter(cs);
-//            }
+//                MainActivity.this.Custom.getFilter().filter(cs);
+//            }                                                                                                                     /*Error 2*/
 //
 //            @Override
-//            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-//                                          int arg3) {
-//                 //TODO Auto-generated method stub
+//            public void afterTextChanged(Editable editable) {
 //
 //            }
 //
-//            @Override
-//            public void afterTextChanged(Editable arg0) {
-//                // TODO Auto-generated method stub
-//            }
+//
 //        });
     }
+    //________________________________________________________________________________________________________________________________________________________
 
 
 }
