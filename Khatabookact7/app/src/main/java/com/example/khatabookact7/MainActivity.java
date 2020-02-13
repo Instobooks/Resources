@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ListView lstView;
     ArrayList<String> arr_name;
-    ArrayList<String> arr_amt;
+    ArrayList<Integer> arr_amt;
     ArrayList<String> arr_trxnType;
     EditText inputSearch;
 //________________________________________________________________________________________________________________________________________________________
@@ -135,26 +135,26 @@ public class MainActivity extends AppCompatActivity {
         arr_name.add("poiuy");
 
 //        Array for balance of customer
-        arr_amt.add("List 1");
-        arr_amt.add("List 2");
-        arr_amt.add("List 3");
-        arr_amt.add("List 4");
-        arr_amt.add("List 5");
-        arr_amt.add("List 6");
-        arr_amt.add("List 7");
-        arr_amt.add("List 8");
-        arr_amt.add("List 9");
-        arr_amt.add("List 10");
-        arr_amt.add("List 1");
-        arr_amt.add("List 2");
-        arr_amt.add("List 3");
-        arr_amt.add("List 4");
-        arr_amt.add("List 5");
-        arr_amt.add("List 6");
-        arr_amt.add("List 7");
-        arr_amt.add("List 8");
-        arr_amt.add("List 9");
-        arr_amt.add("List 10");
+//        arr_amt.add("List 1");
+//        arr_amt.add("List 2");
+//        arr_amt.add("List 3");
+//        arr_amt.add("List 4");
+//        arr_amt.add("List 5");
+//        arr_amt.add("List 6");
+//        arr_amt.add("List 7");
+//        arr_amt.add("List 8");
+//        arr_amt.add("List 9");
+//        arr_amt.add("List 10");
+//        arr_amt.add("List 1");
+//        arr_amt.add("List 2");
+//        arr_amt.add("List 3");
+//        arr_amt.add("List 4");
+//        arr_amt.add("List 5");
+//        arr_amt.add("List 6");
+//        arr_amt.add("List 7");
+//        arr_amt.add("List 8");
+//        arr_amt.add("List 9");
+//        arr_amt.add("List 10");
 
 //        Array for Transaction type of customer;
         arr_trxnType.add("List 1");

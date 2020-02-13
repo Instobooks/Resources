@@ -12,10 +12,10 @@
         android:theme="@style/MyTheme"
         tools:replace="android:label">
         <activity
-            android:name=".CustomerActivity"
+            android:name="com.example.khatabookact7.CustomerActivity"
             android:label="@string/title_activity_customer"></activity>
         <activity
-            android:name=".HomeActivity"
+            android:name="com.example.khatabookact7.HomeActivity"
             android:label="Instobooks"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,17 +25,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.example.khatabookact7.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".Calculator" />
         <activity
-            android:name=".VerifyPhone"
+            android:name="com.example.khatabookact7.VerifyPhone"
             android:label="Verify Details" />
         <activity
-            android:name=".OTP"
+            android:name="com.example.khatabookact7.OTP"
             android:label="OTP Verification" />
         <activity
-            android:name=".Splash"
+            android:name="com.example.khatabookact7.Splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,10 +44,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.khatabookact7.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".AddCustomer"
+            android:name="com.example.khatabookact7.AddCustomer"
             android:label="Add New Khata"
             android:theme="@style/AppTheme" />
     </application>

@@ -1,72 +1,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <EditText
-
-        android:id="@+id/EtxtName"
-        android:inputType="textPersonName"
-        android:paddingLeft="9dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Customer Name"
-        android:textSize="30sp"
-        android:typeface="sans"
-        android:background="@drawable/searchbckgrouond"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:drawableLeft="@drawable/ic_person_black_24dp"/>
+        android:layout_height="528dp"
 
-    <TableLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:stretchColumns="2">
-        <TableRow
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="60dp"
+        android:color="#000"
+        android:outlineAmbientShadowColor="@color/cardview_light_background"
+        android:elevation="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:color = "#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:src="@drawable/usermale90" />
+
+        <EditText
+
+            android:id="@+id/EtxtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ccp_background"
-                android:paddingLeft="7dp"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"/>
-            <EditText
-                android:id="@+id/EtxtPhone"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/searchbckgrouond"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:hint="Customer Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="9dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="30sp"
+            android:typeface="sans" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2">
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:typeface="sans"
-                android:background="@drawable/edit_text_right"
-                android:textSize="30sp"
-                android:hint="Enter number        "
-                android:inputType="phone"
-                android:paddingLeft="7dp"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                />
-        </TableRow>
-    </TableLayout>
-    <Button
-        android:id="@+id/sendOTP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+ Add"
-        android:onClick="addBtn"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*An OTP will bwe sent to your mobile number for verification"
-        android:textSize="10sp"
-        android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="5dp">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ccp_background"
+                    android:paddingLeft="7dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp" />
+
+                <EditText
+                    android:id="@+id/EtxtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_right"
+                    android:hint="Enter number        "
+                    android:inputType="phone"
+                    android:paddingLeft="7dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="30sp"
+                    android:typeface="sans" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/addbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ Add" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="*An OTP will bwe sent to your mobile number for verification"
+            android:textSize="10sp" />
+    </LinearLayout>
 </LinearLayout>
