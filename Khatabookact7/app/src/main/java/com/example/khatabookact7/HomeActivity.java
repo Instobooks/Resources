@@ -22,30 +22,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     ListView lstView;
     ArrayList<String> arr_name;
-    ArrayList<Integer> arr_amt;
+    ArrayList<String> arr_amt;
     ArrayList<String> arr_trxnType;
+    ArrayList<String> arr_mobile;
     EditText inputSearch;
     ArrayAdapter<String> adapterReplica;
     CustomLayoutAdapter Custom;
-    String products[];
-    Cursor cursor ;
+    ArrayList<String> arr_filter;
+    Cursor cursor;
     SQLController myDb;
     int unique = 1;//fro unique notifications
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu1, menu);
         return true;
     }
-
     // options menu Events
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -65,11 +66,9 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -122,9 +121,42 @@ public class HomeActivity extends AppCompatActivity {
         arr_name = new ArrayList<>();
         arr_amt = new ArrayList<>();
         arr_trxnType = new ArrayList<>();
+        arr_mobile = new ArrayList<>();
+//        t_arr = new ArrayList<>();
         inputSearch = (EditText) findViewById(R.id.inputSearch);
         myDb = new SQLController(this);
-        getData();
+        arr_name.add("jaisal");
+        arr_amt.add("123");
+        arr_mobile.add("8169764358");
+        arr_trxnType.add("You will get");
+//        get();
+        cursor = myDb.getAllData();
+//        if(cursor.getCount() == 1){
+//            Toast.makeText(this,"successfully",Toast.LENGTH_SHORT).show();
+//        }
+        if (cursor.moveToFirst()) {
+            do{
+                arr_name.add(cursor.getString(1));
+//                arr_filter.add(cursor.getString(1));
+
+                arr_amt.add(cursor.getString(4));
+
+                int type = cursor.getInt(5);
+                if (type == 0){                                                                                 //if new user
+                    arr_trxnType.add("You will get");
+                }else if(type == 1){                                                                            //if total is -ve
+                    arr_trxnType.add("You will give");
+                } else {                                                                                        //if total is +ve
+                    arr_trxnType.add("");
+                }
+                arr_mobile.add(cursor.getString(2));
+                Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
+                lstView.setAdapter(Custom);
+            }
+            while(cursor.moveToNext());
+        }
+
+//        getData();
 //Extracting DB to listview
 //        cursor = myDb.getAllData();
 //        if (cursor.moveToFirst()) {
@@ -140,23 +172,12 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //            while(cursor.moveToNext());
 //        }
-
 //        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
 //        lstView.setAdapter(Custom);
 
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                final AlertDialog alertDialog = new AlertDialog.Builder(HomeActivity.this).create();
-//
-//                alertDialog.setMessage("Selected:" + arr_name.get(position) + "\nContact No:" + arr_amt.get(position) + "\nEmail:" + arr_trxnType.get(position));
-//                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        alertDialog.dismiss();
-//                    }
-//                });
-//                alertDialog.show();
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(HomeActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_layout, null);
                 final EditText etAmt = (EditText) mView.findViewById(R.id.etAmt);
@@ -166,25 +187,54 @@ public class HomeActivity extends AppCompatActivity {
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
                 mBuilder.setView(mView);
+
+//                btnGave onClick
                 btnGave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!etAmt.getText().toString().isEmpty() ){
-                            Toast.makeText(HomeActivity.this, "You gave "+etAmt.getText().toString(),Toast.LENGTH_SHORT).show();
+                        String unique = arr_mobile.get(position);
+                        String amt = etAmt.getText().toString();
+                        if (!etAmt.getText().toString().isEmpty()) {
+                            boolean isCredited = myDb.updateBalCredit(amt, unique);
+                            if (isCredited) {
+                                Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+//                                get();
+//                                Intent i = new Intent(getApplicationContext(), Loading.class);
+//                                startActivity(i);
+//                                finish();
+//                                startActivity(getIntent());
+//                                onRestart();
+                            } else {
+                                Toast.makeText(HomeActivity.this, "We couldn't process your Credit", Toast.LENGTH_SHORT).show();
+                            }
                             dialog.dismiss();
-                        }else{
-                            Toast.makeText(HomeActivity.this, "Enter amount that you gave",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Enter amount that you gave !", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                btnGave.setOnClickListener(new View.OnClickListener() {
+//                btnReceived onClick
+                btnReceived.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!etAmt.getText().toString().isEmpty() ){
-                            Toast.makeText(HomeActivity.this, "You received "+etAmt.getText().toString(),Toast.LENGTH_SHORT).show();
+                        String unique = arr_mobile.get(position);
+                        String amt = etAmt.getText().toString();
+                        if (!etAmt.getText().toString().isEmpty()) {
+                            boolean isDebited = myDb.updateBalDebit(amt, unique);
+                            if (isDebited) {
+                                Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+//                                get();
+//                                Intent i = new Intent(getApplicationContext(), Loading.class);
+//                                startActivity(i);
+//                                finish();
+//                                startActivity(getIntent());
+//                                onRestart();
+                            } else {
+                                Toast.makeText(HomeActivity.this, "We couldn't process your debit", Toast.LENGTH_SHORT).show();
+                            }
                             dialog.dismiss();
-                        }else{
-                            Toast.makeText(HomeActivity.this, "Enter amount that you gave" ,Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Enter amount that you received !", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -203,29 +253,29 @@ public class HomeActivity extends AppCompatActivity {
                 notificationManager.notify(unique, notification);
             }
         });
-        arr_name.add("jaisal");
-        arr_amt.add(455);
-        arr_trxnType.add(("You will get"));
-//Custom Layout fro ListView containing above arrays
-        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
-        lstView.setAdapter(Custom);
+//        arr_name.add("jaisal");
+//        arr_amt.add("123");
+//
+//        arr_trxnType.add(("You will get"));
+////Custom Layout fro ListView containing above arrays
+//        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
+//        lstView.setAdapter(Custom);
 //Changed from here
 
-        String products[] = {};
+        arr_filter = new ArrayList<>();
 //        String products[] = {"A", "B", "C", "D", "E",
 //                "F", "G",
 //                "H", "I", "J", "K" , "L" , "M" , "N" , "O" , "P" , "Q" , "R"};
 
-        adapterReplica = new ArrayAdapter<String>(this, R.layout.replicalist, R.id.product_name, products);
+        adapterReplica = new ArrayAdapter<String>(this, R.layout.replicalist, R.id.product_name, arr_filter);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
 
-                lstView.setAdapter(adapterReplica);
-                HomeActivity.this.adapterReplica.getFilter().filter(cs);
+//                lstView.setAdapter(adapterReplica);
+//                HomeActivity.this.adapterReplica.getFilter().filter(cs);
 //                try 1
 //                while(cs.toString()==""){
 //                    lstView.setAdapter(Custom);
@@ -253,29 +303,39 @@ public class HomeActivity extends AppCompatActivity {
         });
         lstView.setAdapter(Custom);
     }
-    public void getData(){
+
+    public void get() {
         cursor = myDb.getAllData();
-        if (cursor.moveToFirst()) {
-            do{
-                arr_name.add(cursor.getString(1));
-                arr_amt.add(cursor.getInt(4));
-                int type = cursor.getInt(5);
-                if (type == 0){                                                                                 //if new user
-                    arr_trxnType.add("You will get");
-                }else if(type == 1){                                                                            //if total is -ve
-                    arr_trxnType.add("You will give");
-                } else {                                                                                        //if total is +ve
-                    arr_trxnType.add("");
-                }
-            }
-            while(cursor.moveToNext());
-            Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
-            lstView.setAdapter(Custom);
-        }
+//        if(cursor.getCount() == 1){
+//            Toast.makeText(this,"successfully",Toast.LENGTH_SHORT).show();
+//        }
+//        if (cursor.moveToFirst()) {
+//            do {
+//                arr_name.add(cursor.getString(1));
+//                arr_filter.add(cursor.getString(1));
+//
+//                arr_amt.add(cursor.getString(4));
+//
+//                int type = cursor.getInt(5);
+//                if (type == 0) {                                                                                 //if new user
+//                    arr_trxnType.add("You will get");
+//                } else if (type == 1) {                                                                            //if total is -ve
+//                    arr_trxnType.add("You will give");
+//                } else {                                                                                        //if total is +ve
+//                    arr_trxnType.add("");
+//                }
+//                arr_mobile.add(cursor.getString(2));
+//                Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
+//                lstView.setAdapter(Custom);
+//            }
+//            while (cursor.moveToNext());
+//        }
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
     }
 }
-
-
-
 
 

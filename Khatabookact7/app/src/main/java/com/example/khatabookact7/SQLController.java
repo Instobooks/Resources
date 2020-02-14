@@ -52,10 +52,22 @@ public class SQLController extends SQLiteOpenHelper {
             return true;
         }
     }
-
     public Cursor getAllData(){
         SQLiteDatabase db = getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME,null);
         return res;
+    }
+    public boolean updateBalCredit(String amtCredit, String mobile){
+        SQLiteDatabase db = getWritableDatabase();
+        String updateQry = "update users set balance = balance + " + amtCredit + " where mobile = " + mobile;
+        db.execSQL(updateQry);
+        return true;
+    }
+
+    public boolean updateBalDebit(String amtCredit, String mobile){
+        SQLiteDatabase db = getWritableDatabase();
+        String updateQry = "update users set balance = balance - " + amtCredit + " where mobile = " + mobile;
+        db.execSQL(updateQry);
+        return true;
     }
 }

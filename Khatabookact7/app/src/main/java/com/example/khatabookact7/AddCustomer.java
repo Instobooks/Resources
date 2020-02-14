@@ -61,7 +61,7 @@ public class AddCustomer extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean isInserted = myDb.insert(EtxtName.getText().toString(), EtxtPhone.getText().toString(), 0, 0, date);
+                        boolean isInserted = myDb.insert(EtxtName.getText().toString(), EtxtPhone.getText().toString(), 1, 0, date);
                         if (isInserted) {
                             Toast.makeText(AddCustomer.this, "Inserted", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);

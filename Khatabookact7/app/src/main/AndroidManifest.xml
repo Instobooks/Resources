@@ -11,11 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         tools:replace="android:label">
+        <activity android:name=".Loading"></activity>
         <activity
-            android:name="com.example.khatabookact7.CustomerActivity"
-            android:label="@string/title_activity_customer"></activity>
+            android:name=".CustomerActivity"
+            android:label="@string/title_activity_customer" />
         <activity
-            android:name="com.example.khatabookact7.HomeActivity"
+            android:name=".HomeActivity"
             android:label="Instobooks"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,17 +26,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.khatabookact7.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".Calculator" />
         <activity
-            android:name="com.example.khatabookact7.VerifyPhone"
+            android:name=".VerifyPhone"
             android:label="Verify Details" />
         <activity
-            android:name="com.example.khatabookact7.OTP"
+            android:name=".OTP"
             android:label="OTP Verification" />
         <activity
-            android:name="com.example.khatabookact7.Splash"
+            android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,10 +45,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.khatabookact7.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.example.khatabookact7.AddCustomer"
+            android:name=".AddCustomer"
             android:label="Add New Khata"
             android:theme="@style/AppTheme" />
     </application>
