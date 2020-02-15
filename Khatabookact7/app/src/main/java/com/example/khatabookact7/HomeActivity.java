@@ -226,13 +226,15 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 //                        String unique = arr_mobile.get(position);
-                        int amt = new Integer(etAmt.getText().toString());
+                        Integer amt = Integer.parseInt(etAmt.getText().toString());
                         int bal = arr_amt.get(position);
                         if (!etAmt.getText().toString().isEmpty()) {
+                            Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+
                             bal -= amt;
                             arr_amt.set(position,bal);
                             Custom.notifyDataSetChanged();
-                            if (!etAmt.getText().toString().isEmpty()) {
+
 //                            boolean isDebited = myDb.updateBalDebit(amt, unique);
 //                            if (isDebited) {
                                 Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -245,7 +247,7 @@ public class HomeActivity extends AppCompatActivity {
 //                            } else {
 //                                Toast.makeText(HomeActivity.this, "We couldn't process your debit", Toast.LENGTH_SHORT).show();
 
-                            dialog.dismiss();}
+                            dialog.dismiss();
                         } else {
                             Toast.makeText(HomeActivity.this, "Enter amount that you received !", Toast.LENGTH_SHORT).show();
                         }

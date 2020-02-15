@@ -11,12 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3031ecae-e686-4353-9943-32bb6804fdeb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/CustomLayoutAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/CustomLayoutAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/customlayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customlayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_layout.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +35,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="218" column="32" lean-forward="true" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
+            <state relative-caret-position="149">
+              <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
+              <folding>
+                <element signature="e#6793#12016#0" expanded="true" />
+                <element signature="e#9440#11198#0" expanded="true" />
+                <element signature="e#11197#11198#0" expanded="true" />
+                <element signature="e#12015#12016#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -350,7 +351,7 @@
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.41784704" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.29745042" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.12606232" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.2733711" />
       <window_info anchor="bottom" x="55" y="86" width="1426" height="629" id="Logcat" order="9" type="FLOATING" weight="0.9575071" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -731,8 +732,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khatabookact7/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="218" column="32" lean-forward="true" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
+        <state relative-caret-position="149">
+          <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
+          <folding>
+            <element signature="e#6793#12016#0" expanded="true" />
+            <element signature="e#9440#11198#0" expanded="true" />
+            <element signature="e#11197#11198#0" expanded="true" />
+            <element signature="e#12015#12016#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
