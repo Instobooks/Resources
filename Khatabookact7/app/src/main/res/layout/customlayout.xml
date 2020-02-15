@@ -47,5 +47,7 @@
                 android:typeface="sans"
                 android:textAlignment="textEnd"/>
         </LinearLayout>
+
     </TableRow>
+
 </TableLayout>

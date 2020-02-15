@@ -30,7 +30,8 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     ListView lstView;
     ArrayList<String> arr_name;
-    ArrayList<String> arr_amt;
+//    ArrayList<String> arr_amt;
+    ArrayList<Integer> arr_amt;
     ArrayList<String> arr_trxnType;
     ArrayList<String> arr_mobile;
     EditText inputSearch;
@@ -126,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
         inputSearch = (EditText) findViewById(R.id.inputSearch);
         myDb = new SQLController(this);
         arr_name.add("jaisal");
-        arr_amt.add("123");
+        arr_amt.add(123);
         arr_mobile.add("8169764358");
         arr_trxnType.add("You will get");
 //        get();
@@ -139,8 +140,8 @@ public class HomeActivity extends AppCompatActivity {
                 arr_name.add(cursor.getString(1));
 //                arr_filter.add(cursor.getString(1));
 
-                arr_amt.add(cursor.getString(4));
-
+//                arr_amt.add(cursor.getInt(4));
+                arr_amt.add(0);
                 int type = cursor.getInt(5);
                 if (type == 0){                                                                                 //if new user
                     arr_trxnType.add("You will get");
@@ -149,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else {                                                                                        //if total is +ve
                     arr_trxnType.add("");
                 }
-                arr_mobile.add(cursor.getString(2));
+//                arr_mobile.add(cursor.getString(2));
                 Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
                 lstView.setAdapter(Custom);
             }
@@ -172,8 +173,8 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //            while(cursor.moveToNext());
 //        }
-//        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
-//        lstView.setAdapter(Custom);
+        Custom = new CustomLayoutAdapter(this, arr_name, arr_amt, arr_trxnType);
+        lstView.setAdapter(Custom);
 
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -192,36 +193,48 @@ public class HomeActivity extends AppCompatActivity {
                 btnGave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String unique = arr_mobile.get(position);
-                        String amt = etAmt.getText().toString();
+//                        String unique = arr_mobile.get(position);
+//                        int amt = etAmt.getText();
+// new Integer(sTextFromET).intValue();
+                        Integer amt = Integer.parseInt(etAmt.getText().toString());
+                        int bal = arr_amt.get(position);
                         if (!etAmt.getText().toString().isEmpty()) {
-                            boolean isCredited = myDb.updateBalCredit(amt, unique);
-                            if (isCredited) {
-                                Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                            bal += amt;
+                            arr_amt.set(position,bal);
+                            Custom.notifyDataSetChanged();
+//                            boolean isCredited = myDb.updateBalCredit(amt, unique);
+//                            if (isCredited) {
 //                                get();
 //                                Intent i = new Intent(getApplicationContext(), Loading.class);
 //                                startActivity(i);
 //                                finish();
 //                                startActivity(getIntent());
 //                                onRestart();
-                            } else {
-                                Toast.makeText(HomeActivity.this, "We couldn't process your Credit", Toast.LENGTH_SHORT).show();
-                            }
+//                            } else {
+//                                Toast.makeText(HomeActivity.this, "We couldn't process your Credit", Toast.LENGTH_SHORT).show();
+//                            }
                             dialog.dismiss();
                         } else {
                             Toast.makeText(HomeActivity.this, "Enter amount that you gave !", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-//                btnReceived onClick
+////                btnReceived onClick
                 btnReceived.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String unique = arr_mobile.get(position);
-                        String amt = etAmt.getText().toString();
+//                        String unique = arr_mobile.get(position);
+                        int amt = new Integer(etAmt.getText().toString());
+                        int bal = arr_amt.get(position);
                         if (!etAmt.getText().toString().isEmpty()) {
-                            boolean isDebited = myDb.updateBalDebit(amt, unique);
-                            if (isDebited) {
+                            bal -= amt;
+                            arr_amt.set(position,bal);
+                            Custom.notifyDataSetChanged();
+                            if (!etAmt.getText().toString().isEmpty()) {
+//                            boolean isDebited = myDb.updateBalDebit(amt, unique);
+//                            if (isDebited) {
                                 Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
 //                                get();
 //                                Intent i = new Intent(getApplicationContext(), Loading.class);
@@ -229,10 +242,10 @@ public class HomeActivity extends AppCompatActivity {
 //                                finish();
 //                                startActivity(getIntent());
 //                                onRestart();
-                            } else {
-                                Toast.makeText(HomeActivity.this, "We couldn't process your debit", Toast.LENGTH_SHORT).show();
-                            }
-                            dialog.dismiss();
+//                            } else {
+//                                Toast.makeText(HomeActivity.this, "We couldn't process your debit", Toast.LENGTH_SHORT).show();
+
+                            dialog.dismiss();}
                         } else {
                             Toast.makeText(HomeActivity.this, "Enter amount that you received !", Toast.LENGTH_SHORT).show();
                         }

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class CustomLayoutAdapter extends ArrayAdapter<String> {
     Activity ac;
     ArrayList<String> name;
-    ArrayList<String> amount;
+    ArrayList<Integer> amount;
     ArrayList<String> trxnType;
 //    Defining CustomLayuotAdapter method
-    public CustomLayoutAdapter(Activity activity, ArrayList<String> arr_name,ArrayList<String> arr_amt,ArrayList <String> arr_trxntype){
+    public CustomLayoutAdapter(Activity activity, ArrayList<String> arr_name,ArrayList<Integer> arr_amt,ArrayList <String> arr_trxntype){
         super(activity,R.layout.customlayout,arr_name);
         this.ac=activity;
         this.name=arr_name;
@@ -34,7 +34,7 @@ public class CustomLayoutAdapter extends ArrayAdapter<String> {
         TextView txtAmt=v.findViewById(R.id.txtAmt);
         TextView txttrxnType=v.findViewById(R.id.trxnType);
         txtName.setText(name.get(position));
-        txtAmt.setText(amount.get(position));
+        txtAmt.setText(amount.get(position).toString());
         txttrxnType.setText(trxnType.get(position));
         return v;
     }
