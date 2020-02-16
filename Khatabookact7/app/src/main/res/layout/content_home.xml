@@ -7,16 +7,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".HomeActivity"
     tools:showIn="@layout/activity_main"
-    android:color="#918F94"
-    android:orientation="vertical">
-
+    android:background="@android:drawable/gallery_thumb"
+    android:orientation="vertical"
+>
     <LinearLayout
+        android:id="@+id/dash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/searchbckgrouond"
+        android:background="@drawable/dashbackground"
         android:paddingRight="9dp"
-        android:color="#FFFFFF"
+        android:color="#D6C89A"
         android:paddingLeft="9dp"
         android:paddingTop="9dp"
         android:layout_marginTop="7dp"
@@ -44,12 +45,12 @@
                             android:paddingRight="5dp"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:id="@+id/willGet"
+                                    android:id="@+id/willGet"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:textColor="@android:color/holo_green_dark"
                             android:textSize="30sp"
-                            android:text="10000"/>
+                            android:text=""/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
@@ -70,7 +71,8 @@
                             android:layout_width="match_parent"
                             android:textColor="@android:color/holo_red_light"
                             android:textSize="30sp"
-                            android:text="10000"/>
+                            android:layout_margin="15dp"
+                            android:text=""/>
                     </TableRow>
         </TableLayout>
 <!--        <ImageView-->
@@ -88,7 +90,7 @@
         android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search"
+        android:hint="   Search"
         android:textSize="25sp"
         android:background="@drawable/searchbckgrouond"
         android:layout_marginTop="7dp"

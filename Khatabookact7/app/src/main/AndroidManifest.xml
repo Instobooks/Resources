@@ -19,11 +19,7 @@
             android:name=".HomeActivity"
             android:label="Instobooks"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -31,14 +27,19 @@
         <activity android:name=".Calculator" />
         <activity
             android:name=".VerifyPhone"
-            android:label="Verify Details" />
+            android:label="Verify Details"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".OTP"
             android:label="OTP Verification" />
         <activity
             android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

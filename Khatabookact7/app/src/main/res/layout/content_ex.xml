@@ -72,14 +72,17 @@
         android:id="@+id/inputSearch"/>
 
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ListView
         android:id="@+id/lstView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#000"
+        android:divider="#AAC8E0"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false" />
-
+</ScrollView>
 </LinearLayout>
+

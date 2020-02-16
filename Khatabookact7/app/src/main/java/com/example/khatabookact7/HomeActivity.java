@@ -16,7 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +31,8 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     ListView lstView;
+    LinearLayout dash;
     ArrayList<String> arr_name;
-//    ArrayList<String> arr_amt;
     ArrayList<Integer> arr_amt;
     ArrayList<String> arr_trxnType;
     ArrayList<String> arr_mobile;
@@ -40,6 +42,13 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<String> arr_filter;
     Cursor cursor;
     SQLController myDb;
+    ArrayList<String> products;
+    Integer creditCount = 0;
+    Integer debitCount = 0;
+    Integer total = 0;
+    Integer show;
+    TextView willGet;
+    TextView willGive;
     int unique = 1;//fro unique notifications
 
     @Override
@@ -86,7 +95,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
 //        String name, amt, trxnType;
 
 //        Getting Intent Data from previous activity
@@ -105,31 +113,45 @@ public class HomeActivity extends AppCompatActivity {
 //            arr_amt.add(0, amt);
 //            arr_trxnType.add(0, trxnType);
 //        }
-
-
+//        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+//                .getBoolean("isFirstRun", true);
+//        if (isFirstRun) {
+//            //show sign up activity
+//            startActivity(new Intent(HomeActivity.this, VerifyPhone.class));
+//            Toast.makeText(HomeActivity.this, "Run only once", Toast.LENGTH_LONG)
+//                    .show();
+//        }
+//        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+//                .putBoolean("isFirstRun", false).commit();
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-
         if (isFirstRun) {
-            //show sign up activity
+            //show start activity
             startActivity(new Intent(HomeActivity.this, VerifyPhone.class));
-            Toast.makeText(HomeActivity.this, "Run only once", Toast.LENGTH_LONG)
+            Toast.makeText(HomeActivity.this, "First Run", Toast.LENGTH_LONG)
                     .show();
         }
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).commit();
+
         lstView = (ListView) findViewById(R.id.lstView);
+        dash = findViewById(R.id.dash);
         arr_name = new ArrayList<>();
         arr_amt = new ArrayList<>();
         arr_trxnType = new ArrayList<>();
         arr_mobile = new ArrayList<>();
+        arr_filter = new ArrayList<>();
+        products = new ArrayList<>();
+        willGet = findViewById(R.id.willGet);
+        willGive = findViewById(R.id.willGive);
 //        t_arr = new ArrayList<>();
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
+        inputSearch = findViewById(R.id.inputSearch);
         myDb = new SQLController(this);
-        arr_name.add("jaisal");
-        arr_amt.add(123);
-        arr_mobile.add("8169764358");
-        arr_trxnType.add("You will get");
+//        arr_name.add("jaisal");
+//        arr_amt.add(123);
+//        arr_mobile.add("8169764358");
+//        arr_trxnType.add("You will get");
+//        arr_filter.add("jaisal");
 //        get();
         cursor = myDb.getAllData();
 //        if(cursor.getCount() == 1){
@@ -138,6 +160,7 @@ public class HomeActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             do{
                 arr_name.add(cursor.getString(1));
+                products.add(cursor.getString(1));
 //                arr_filter.add(cursor.getString(1));
 
 //                arr_amt.add(cursor.getInt(4));
@@ -156,7 +179,6 @@ public class HomeActivity extends AppCompatActivity {
             }
             while(cursor.moveToNext());
         }
-
 //        getData();
 //Extracting DB to listview
 //        cursor = myDb.getAllData();
@@ -188,7 +210,6 @@ public class HomeActivity extends AppCompatActivity {
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
                 mBuilder.setView(mView);
-
 //                btnGave onClick
                 btnGave.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -204,21 +225,56 @@ public class HomeActivity extends AppCompatActivity {
                             bal += amt;
                             arr_amt.set(position,bal);
                             Custom.notifyDataSetChanged();
-//                            boolean isCredited = myDb.updateBalCredit(amt, unique);
-//                            if (isCredited) {
-//                                get();
-//                                Intent i = new Intent(getApplicationContext(), Loading.class);
-//                                startActivity(i);
-//                                finish();
-//                                startActivity(getIntent());
-//                                onRestart();
-//                            } else {
-//                                Toast.makeText(HomeActivity.this, "We couldn't process your Credit", Toast.LENGTH_SHORT).show();
+                            if (debitCount == 0){
+                                creditCount +=amt;
+                            } else if (creditCount>debitCount){
+//                                creditCount=creditCountamt;
+//                                debitCount=debitCount-amt;
+                                if (amt>debitCount){
+                                    creditCount=creditCount+(amt-debitCount);
+                                    debitCount=0;
+                                }else {
+                                    debitCount= debitCount-amt;
+                                }
+                            } else if (debitCount>creditCount){
+//                                debitCount=debitCount-amt;
+//                                creditCount=creditCount+amt;
+                                if (amt>debitCount){
+                                    creditCount=creditCount+(amt-debitCount);
+                                    debitCount=0;
+                                }else {
+                                    creditCount=0;
+                                    debitCount-=amt;
+                                }
+                            }
+//                            if(creditCount <= 0 ){
+//                                creditCount += amt;                 //debitCount
+//                                debitCount -= amt;
+//                            if(debitCount <= 0){
+//                                debitCount = 0;
 //                            }
+//                                creditCount = 0;
+
+//                            creditCount = amt + creditCount;
+                            willGet.setText(creditCount.toString());
+                            willGive.setText(debitCount.toString());
+
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this);
+
+                            builder.setContentTitle("New Entry: \n You paid ₹:"+ amt + " to " +arr_name.get(position) +" .\nBalance: "+ arr_name.get(position) + " will give you ₹:" + bal)
+                                    .setContentText("Transcation").setSmallIcon(R.drawable.ic_swap_calls_black_24dp)
+                                    .build();
+                            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            Notification notification = builder.build();
+                            notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                            unique++;
+                            notificationManager.notify(unique, notification);
                             dialog.dismiss();
                         } else {
                             Toast.makeText(HomeActivity.this, "Enter amount that you gave !", Toast.LENGTH_SHORT).show();
                         }
+                        Intent i =new Intent(getApplicationContext(),Loading.class);
+                        startActivity(i);
                     }
                 });
 ////                btnReceived onClick
@@ -229,45 +285,77 @@ public class HomeActivity extends AppCompatActivity {
                         Integer amt = Integer.parseInt(etAmt.getText().toString());
                         int bal = arr_amt.get(position);
                         if (!etAmt.getText().toString().isEmpty()) {
-                            Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.this, "You receiveed ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
 
                             bal -= amt;
                             arr_amt.set(position,bal);
                             Custom.notifyDataSetChanged();
+                            if (creditCount == 0) {
+                                debitCount+=amt;
+                            }
+                            else if (debitCount>creditCount) {
+//                                debitCount=debitCount+amt;
+                                if (amt>creditCount) {
+//                                    debitCount+=amt;
+                                    creditCount = 0;
+                                    debitCount = debitCount + (amt - creditCount);
+                                } else {
+                                    creditCount-=amt;
+                                }
+                            }
+                            else if (creditCount>debitCount){
+                                if (amt>creditCount){
 
-//                            boolean isDebited = myDb.updateBalDebit(amt, unique);
-//                            if (isDebited) {
-                                Toast.makeText(HomeActivity.this, "You gave ₹" + etAmt.getText().toString(), Toast.LENGTH_SHORT).show();
-//                                get();
-//                                Intent i = new Intent(getApplicationContext(), Loading.class);
-//                                startActivity(i);
-//                                finish();
-//                                startActivity(getIntent());
-//                                onRestart();
-//                            } else {
-//                                Toast.makeText(HomeActivity.this, "We couldn't process your debit", Toast.LENGTH_SHORT).show();
+                                    debitCount=debitCount+(amt-creditCount);
+                                    creditCount=0;
+                                }else {
 
+                                    debitCount=debitCount+(amt-creditCount);
+                                    creditCount=0;
+                                }
+//                                creditCount-=amt;
+//                                debitCount+=creditCount;
+                            }//amt-credit
+
+//                            debitCount += amt;
+//                            creditCount -= amt;
+//                            if(creditCount <= 0){
+//                                creditCount = 0;
+//                            }
+
+//                            if(debitCount <= 0){
+//                                debitCount = 0;
+//                            } else{
+//                                debitCount = debitCount + amt;
+//                                creditCount
+//                            }
+
+                            willGet.setText(creditCount.toString());
+                            willGive.setText(debitCount.toString());
+
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this);
+
+                            builder.setContentTitle("New Entry: \n You received ₹:"+ amt + "from" +arr_name.get(position) +" .\nBalance: "+ arr_name.get(position) + " will give you ₹:" + bal)
+                                    .setContentText("Transaction").setSmallIcon(R.drawable.ic_swap_calls_black_24dp)
+                                    .build();
+                            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            Notification notification = builder.build();
+                            notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                            unique++;
+                            notificationManager.notify(unique, notification);
                             dialog.dismiss();
                         } else {
                             Toast.makeText(HomeActivity.this, "Enter amount that you received !", Toast.LENGTH_SHORT).show();
                         }
+                        Intent i =new Intent(getApplicationContext(),Loading.class);
+                        startActivity(i);
                     }
                 });
 //                Implementation of push notification
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this);
 
-                builder.setContentTitle("Selected:" + arr_name.get(position) + "\nContact No:" + arr_amt.get(position) + "\nEmail:" + arr_trxnType.get(position))
-                        .setContentText("OTP").setSmallIcon(R.drawable.ic_access_black_24dp)
-
-                        .build();
-                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                Notification notification = builder.build();
-
-                notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                unique++;
-                notificationManager.notify(unique, notification);
             }
         });
+
 //        arr_name.add("jaisal");
 //        arr_amt.add("123");
 //
@@ -277,20 +365,18 @@ public class HomeActivity extends AppCompatActivity {
 //        lstView.setAdapter(Custom);
 //Changed from here
 
-        arr_filter = new ArrayList<>();
-//        String products[] = {"A", "B", "C", "D", "E",
-//                "F", "G",
-//                "H", "I", "J", "K" , "L" , "M" , "N" , "O" , "P" , "Q" , "R"};
 
-        adapterReplica = new ArrayAdapter<String>(this, R.layout.replicalist, R.id.product_name, arr_filter);
+
+
+        adapterReplica = new ArrayAdapter<String>(this, R.layout.replicalist, R.id.product_name, products);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
 
-//                lstView.setAdapter(adapterReplica);
-//                HomeActivity.this.adapterReplica.getFilter().filter(cs);
+                lstView.setAdapter(adapterReplica);
+                HomeActivity.this.adapterReplica.getFilter().filter(cs);
 //                try 1
 //                while(cs.toString()==""){
 //                    lstView.setAdapter(Custom);
@@ -302,7 +388,6 @@ public class HomeActivity extends AppCompatActivity {
 //                    lstView.setAdapter(adapterReplica);
 //                }
             }
-
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
@@ -317,6 +402,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         lstView.setAdapter(Custom);
+        Custom.notifyDataSetChanged();
+
     }
 
     public void get() {

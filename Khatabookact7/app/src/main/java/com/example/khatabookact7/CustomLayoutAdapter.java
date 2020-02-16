@@ -32,10 +32,10 @@ public class CustomLayoutAdapter extends ArrayAdapter<String> {
         v=inflater.inflate(R.layout.customlayout,null);
         TextView txtName=v.findViewById(R.id.txtName);
         TextView txtAmt=v.findViewById(R.id.txtAmt);
-        TextView txttrxnType=v.findViewById(R.id.trxnType);
+
         txtName.setText(name.get(position));
         txtAmt.setText(amount.get(position).toString());
-        txttrxnType.setText(trxnType.get(position));
+
         return v;
     }
 }
